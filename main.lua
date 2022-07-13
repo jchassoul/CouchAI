@@ -9,7 +9,6 @@ end)
 
 client:on("messageCreate", function(message)
 	local author = message.guild:getMember(message.author.id)
-
 	-- Confirm the bot is actually able to ban users
 	if not message.guild.me:hasPermission('banMembers') then
 		message:reply('I am missing the `ban` permission')
@@ -18,8 +17,9 @@ client:on("messageCreate", function(message)
 	if #message.mentionedUsers >= 5 or message.mentionsEveryone then
 		-- Confirm the bot is able to ban the author 
 		if message.guild.me.highestRole.position > author.highestRole.position then
-			message:delete()
 			author:ban()
+			message:delete()
+			message:reply('Good bye! '..author.user.username)
 			return
 		end
 	end
