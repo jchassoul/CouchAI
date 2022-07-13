@@ -19,7 +19,7 @@ client:on("messageCreate", function(message)
 		if message.guild.me.highestRole.position > author.highestRole.position then
 			author:ban()
 			message:delete()
-			message:reply('Good bye! '..author.user.username)
+			message:reply('Go away '..author.user.username..'!')
 			return
 		end
 	end
