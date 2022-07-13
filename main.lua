@@ -1,4 +1,4 @@
--- can i haz it? 
+-- Unacceptable spamming zone
 
 local discordia = require("discordia")
 local client = discordia.Client()
@@ -9,17 +9,16 @@ end)
 
 client:on("messageCreate", function(message)
 	local author = message.guild:getMember(message.author.id)
-	-- Confirm the bot is actually able to ban users
+	-- Confirm bot is actually able to ban users
 	if not message.guild.me:hasPermission('banMembers') then
 		message:reply('I am missing the `ban` permission')
 		return
 	end
+	-- Confirm bot is able to ban the author 
 	if #message.mentionedUsers >= 5 or message.mentionsEveryone then
-		-- Confirm the bot is able to ban the author 
 		if message.guild.me.highestRole.position > author.highestRole.position then
 			author:ban()
 			message:delete()
-			message:reply('Go away '..author.user.username..'!')
 			return
 		end
 	end
